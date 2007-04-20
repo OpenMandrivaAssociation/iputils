@@ -1,22 +1,21 @@
-#rh-20020124-2
 %define bondingver 1.1.0
-%define ver 020927
+%define version 20070202
+%define release %mkrel 1
+%define distname %{name}-s%{version}
 
 Summary:	Network monitoring tools including ping
 Name:		iputils
-Version:	20%{ver}
-Release:	%mkrel 10
+Version:	%{version}
+Release:	%{release}
 License:	BSD
 Group:		System/Base
 URL:		ftp://ftp.inr.ac.ru/ip-routing/
-Source0:	http://ftp.sunet.se/pub/os/Linux/ip-routing/iputils-ss%{ver}.tar.bz2
+Source0:	http://ftp.sunet.se/pub/os/Linux/ip-routing/%{distname}.tar.bz2
 Source1:	bonding-%{bondingver}.tar.bz2
-Patch0:		iputils-20001007-rh7.patch
-Patch1:		iputils-20020927-datalen.patch
-Patch2:		iputils-20020927-ping_sparcfix.patch
-Patch3:		iputils-20020124-rdisc-server.patch
+Patch0:		iputils-s20070202-s_addr.patch
+Patch2:		iputils-s20070202-ping_sparcfix.patch
+Patch3:		iputils-s20070202-rdisc-server.patch
 Patch4:		iputils-20020124-countermeasures.patch
-Patch125:	iputils-20020927-fix-traceroute.patch
 BuildRequires:	openjade
 BuildRequires:	perl-SGMLSpm
 BuildRequires:	docbook-dtd31-sgml
@@ -30,15 +29,11 @@ host and can tell you if that machine is alive and receiving network traffic.
 
 %prep
 
-%setup -q -n %{name} -a 1
-
-%patch0 -p1 -b .rh7
-%patch1 -p1 -b .datalen
+%setup -q -n %{distname} -a 1
+%patch0 -p1 -b .s_addr
 %patch2 -p1 -b .ping_sparcfix
-%patch3 -p1 -b .rdisc
+%patch3 -p1 -b .rdisc-server
 %patch4 -p1 -b .counter
-
-%patch125 -p1
 
 %build
 perl -pi -e 's!\$\(MAKE\) -C doc html!!g' Makefile
