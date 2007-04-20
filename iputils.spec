@@ -9,8 +9,8 @@ Version:	%{version}
 Release:	%{release}
 License:	BSD
 Group:		System/Base
-URL:		ftp://ftp.inr.ac.ru/ip-routing/
-Source0:	http://ftp.sunet.se/pub/os/Linux/ip-routing/%{distname}.tar.bz2
+URL:		http://linux-net.osdl.org/index.php/Iputils
+Source0:	http://www.skbuff.net/iputils/%{distname}.tar.bz2
 Source1:	bonding-%{bondingver}.tar.bz2
 Patch0:		iputils-s20070202-s_addr.patch
 Patch2:		iputils-s20070202-ping_sparcfix.patch
