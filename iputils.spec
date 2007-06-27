@@ -1,6 +1,6 @@
 %define bondingver 1.1.0
 %define version 20070202
-%define release %mkrel 1
+%define release %mkrel 2
 %define distname %{name}-s%{version}
 
 Summary:	Network monitoring tools including ping
@@ -36,9 +36,10 @@ host and can tell you if that machine is alive and receiving network traffic.
 %patch4 -p1 -b .counter
 
 %build
+%serverbuild
 perl -pi -e 's!\$\(MAKE\) -C doc html!!g' Makefile
-%make CCOPT="%{optflags}"
-%make ifenslave CFLAGS="%{optflags}" -C bonding-%{bondingver}
+%make CCOPT="$RPM_OPT_FLAGS"
+%make ifenslave CFLAGS="$RPM_OPT_FLAGS" -C bonding-%{bondingver}
 
 make -C doc man
 
