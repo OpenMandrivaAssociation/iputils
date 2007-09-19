@@ -1,6 +1,6 @@
 %define bondingver 1.1.0
 %define version 20070202
-%define release %mkrel 2
+%define release %mkrel 3
 %define distname %{name}-s%{version}
 
 Summary:	Network monitoring tools including ping
@@ -12,6 +12,7 @@ Group:		System/Base
 URL:		http://linux-net.osdl.org/index.php/Iputils
 Source0:	http://www.skbuff.net/iputils/%{distname}.tar.bz2
 Source1:	bonding-%{bondingver}.tar.bz2
+Source2:        bin.ping.apparmor
 Patch0:		iputils-s20070202-s_addr.patch
 Patch2:		iputils-s20070202-ping_sparcfix.patch
 Patch3:		iputils-s20070202-rdisc-server.patch
@@ -20,6 +21,7 @@ BuildRequires:	openjade
 BuildRequires:	perl-SGMLSpm
 BuildRequires:	docbook-dtd31-sgml
 Conflicts:	xinetd < 2.1.8.9pre14-2mdk
+Conflicts:      apparmor-profiles < 2.1-1.961.5mdv2008.0
 BuildRoot:	%{_tmppath}/%{name}-%{version}-root
 
 %description
@@ -71,12 +73,23 @@ install -c bonding-%{bondingver}/ifenslave.8 %{buildroot}%{_mandir}/man8/
 rm -f %{buildroot}%{_mandir}/man8/rarpd.8*
 rm -f %{buildroot}%{_mandir}/man8/tftpd.8*
 
+# apparmor profile
+mkdir -p %{buildroot}%{_sysconfdir}/apparmor.d/
+install -m 0644 %{SOURCE2} %{buildroot}%{_sysconfdir}/apparmor.d/bin.ping
+
+%posttrans
+# if we have apparmor installed, reload if it's being used
+if [ -x /sbin/apparmor_parser ]; then
+        /sbin/service apparmor condreload
+fi
+
 %clean
 rm -rf %{buildroot}
 
 %files
 %defattr(-,root,root)
 %doc RELNOTES bonding-%{bondingver}/bonding.txt
+%config(noreplace) %{_sysconfdir}/apparmor.d/bin.ping
 %{_sbindir}/clockdiff
 %attr(4755,root,root)	/bin/ping
 /sbin/arping
