@@ -22,7 +22,6 @@ BuildRequires:	perl-SGMLSpm
 BuildRequires:	docbook-dtd31-sgml
 Conflicts:	xinetd < 2.1.8.9pre14-2mdk
 Conflicts:      apparmor-profiles < 2.1-1.961.5mdv2008.0
-BuildRoot:	%{_tmppath}/%{name}-%{version}-root
 
 %description
 The iputils package contains ping, a basic networking tool. The ping command
