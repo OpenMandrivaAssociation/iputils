@@ -12,14 +12,15 @@ Group:		System/Base
 URL:		http://linux-net.osdl.org/index.php/Iputils
 Source0:	http://www.skbuff.net/iputils/%{distname}.tar.bz2
 Source1:	bonding-%{bondingver}.tar.bz2
-Source2:        bin.ping.apparmor
+Source2:	bin.ping.apparmor
 Patch0:		iputils-s20070202-s_addr.patch
 Patch2:		iputils-s20070202-ping_sparcfix.patch
 Patch3:		iputils-s20070202-rdisc-server.patch
 Patch4:		iputils-20020124-countermeasures.patch
+BuildRequires:	perl-SGMLSpm
 BuildRequires:	docbook-dtd31-sgml
 Conflicts:	xinetd < 2.1.8.9pre14-2mdk
-Conflicts:      apparmor-profiles < 2.1-1.961.5mdv2008.0
+Conflicts:	apparmor-profiles < 2.1-1.961.5mdv2008.0
 
 %description
 The iputils package contains ping, a basic networking tool. The ping command
