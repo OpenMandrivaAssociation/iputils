@@ -1,6 +1,6 @@
 %define bondingver 1.1.0
-%define version 20070202
-%define release %mkrel 3
+%define version 20071127
+%define release %mkrel 1
 %define distname %{name}-s%{version}
 
 Summary:	Network monitoring tools including ping
@@ -17,8 +17,6 @@ Patch0:		iputils-s20070202-s_addr.patch
 Patch2:		iputils-s20070202-ping_sparcfix.patch
 Patch3:		iputils-s20070202-rdisc-server.patch
 Patch4:		iputils-20020124-countermeasures.patch
-BuildRequires:	openjade
-BuildRequires:	perl-SGMLSpm
 BuildRequires:	docbook-dtd31-sgml
 Conflicts:	xinetd < 2.1.8.9pre14-2mdk
 Conflicts:      apparmor-profiles < 2.1-1.961.5mdv2008.0
@@ -39,8 +37,8 @@ host and can tell you if that machine is alive and receiving network traffic.
 %build
 %serverbuild
 perl -pi -e 's!\$\(MAKE\) -C doc html!!g' Makefile
-%make CCOPT="$RPM_OPT_FLAGS"
-%make ifenslave CFLAGS="$RPM_OPT_FLAGS" -C bonding-%{bondingver}
+%make CCOPT="%{optflags}"
+%make ifenslave CFLAGS="%{optflags}" -C bonding-%{bondingver}
 
 make -C doc man
 
