@@ -17,6 +17,8 @@ Patch0:		iputils-s20070202-s_addr.patch
 Patch2:		iputils-s20070202-ping_sparcfix.patch
 Patch3:		iputils-s20070202-rdisc-server.patch
 Patch4:		iputils-20020124-countermeasures.patch
+Patch5:		iputils-s20071127-OPEN_MAX-is-dead.patch
+Patch6:		add-icmp-return-codes.diff
 BuildRequires:	perl-SGMLSpm
 BuildRequires:	docbook-dtd31-sgml
 Conflicts:	xinetd < 2.1.8.9pre14-2mdk
@@ -34,6 +36,8 @@ host and can tell you if that machine is alive and receiving network traffic.
 %patch2 -p1 -b .ping_sparcfix
 %patch3 -p1 -b .rdisc-server
 %patch4 -p1 -b .counter
+%patch5 -p1 -b .openmax
+%patch6 -p1 -b .icmperror
 
 %build
 %serverbuild
@@ -41,7 +45,7 @@ perl -pi -e 's!\$\(MAKE\) -C doc html!!g' Makefile
 %make CCOPT="%{optflags}"
 %make ifenslave CFLAGS="%{optflags}" -C bonding-%{bondingver}
 
-make -C doc man
+make man
 
 %install
 rm -rf %{buildroot}
