@@ -9,6 +9,7 @@ Version:	%{version}
 Release:	%{release}
 License:	BSD
 Group:		System/Base
+BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
 URL:		http://linux-net.osdl.org/index.php/Iputils
 Source0:	http://www.skbuff.net/iputils/%{distname}.tar.bz2
 Source1:	bonding-%{bondingver}.tar.bz2
