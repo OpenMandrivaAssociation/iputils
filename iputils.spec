@@ -1,6 +1,6 @@
 %define bondingver 1.1.0
 %define version 20071127
-%define release %mkrel 2
+%define release %mkrel 3
 %define distname %{name}-s%{version}
 
 Summary:	Network monitoring tools including ping
