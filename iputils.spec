@@ -4,7 +4,7 @@
 Summary:	Network monitoring tools including ping
 Name:		iputils
 Version:	%{version}
-Release:	%mkrel 6
+Release:	%mkrel 5
 License:	BSD
 Group:		System/Base
 URL:		http://linux-net.osdl.org/index.php/Iputils
@@ -38,7 +38,6 @@ BuildRequires:	perl-SGMLSpm
 Conflicts:	xinetd < 2.1.8.9pre14-2mdk
 Conflicts:	apparmor-profiles < 2.1-1.961.5mdv2008.0
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
-Provides:	/sbin/arping
 
 %description
 The iputils package contains ping, a basic networking tool. The ping command
