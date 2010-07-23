@@ -34,6 +34,7 @@ Patch18:	iputils-s20100214-fix_in6_pktinfo.patch
 Patch19:	iputils-s20100214-icmp_return_messages.patch
 Patch20:	iputils-s20100214-fix_ping_stats_for_dead_hosts.patch
 Patch21:	iputils-s20100214-addoptlags.patch
+Patch22:	iputils-s20100214-bug60044.diff
 BuildRequires:	docbook-dtd31-sgml
 BuildRequires:	libidn-devel
 BuildRequires:	libsysfs-devel
@@ -73,6 +74,7 @@ cp %{SOURCE3} .
 %patch19 -p1 -b .icmp_return_messages
 %patch20 -p1 -b .dead-hosts
 %patch21 -p1 -b .optflags
+%patch22 -p0
 
 %build
 %serverbuild
