@@ -1,4 +1,4 @@
-%define version 20100214
+%define version 20100418
 %define distname %{name}-s%{version}
 
 Summary:	Network monitoring tools including ping
@@ -22,19 +22,19 @@ Patch4:		iputils-20020124-countermeasures.patch
 Patch6:		iputils-20020927-addrcache.patch
 Patch7:		iputils-20020927-ping-subint.patch
 Patch9:		iputils-ifenslave.patch
-Patch10:	iputils-20020927-arping-infiniband.patch
-Patch11:	iputils-s20100214-idn.patch
+Patch10:	iputils-s20100418-arping-infiniband.patch
+Patch11:	iputils-s20100418-idn.patch
 Patch12:	iputils-20070202-traffic_class.patch
-Patch13:	iputils-20100214-arping_timeout.patch
+Patch13:	iputils-s20100418-arping_timeout.patch
 Patch14:	iputils-20071127-output.patch
-Patch15:	iputils-20070202-ia64_align.patch
+Patch15:	iputils-s20100418-ia64_align.patch
 Patch16:	iputils-20071127-warnings.patch
 Patch17:	iputils-s20071127-format_not_a_string_literal_and_no_format_arguments.diff
-Patch18:	iputils-s20100214-fix_in6_pktinfo.patch
-Patch19:	iputils-s20100214-icmp_return_messages.patch
-Patch20:	iputils-s20100214-fix_ping_stats_for_dead_hosts.patch
-Patch21:	iputils-s20100214-addoptlags.patch
-Patch22:	iputils-s20100214-bug60044.diff
+Patch18:	iputils-s20100418-fix_in6_pktinfo.patch
+Patch19:	iputils-s20100418-icmp_return_messages.patch
+Patch20:	iputils-s20100418-fix_ping_stats_for_dead_hosts.patch
+Patch21:	iputils-s20100418-addoptlags.patch
+Patch22:	iputils-s20100418-dos.patch
 BuildRequires:	docbook-dtd31-sgml
 BuildRequires:	libidn-devel
 BuildRequires:	libsysfs-devel
@@ -59,22 +59,22 @@ cp %{SOURCE3} .
 %patch0 -p0 -b .s_addr
 %patch2 -p1 -b .ping_sparcfix
 %patch3 -p1 -b .rdisc-server
-#%patch4 -p1 -b .counter NEEDED?
-#%patch6 -p1 -b .addrcache NEEDED?
-#%patch7 -p1 -b .ping-subint NEEDED?
-#%patch9 -p1 -b .addr NEEDED?
+%patch4 -p1 -b .counter
+%patch6 -p1 -b .addrcache
+%patch7 -p1 -b .ping-subint
+%patch9 -p1 -b .addr
 %patch10 -p1 -b .infiniband
 %patch11 -p1 -b .idn
-#%patch12 -p1 -b .traffic_class NEEDED?
-%patch13 -p1 -b .arping_timeout
-#%patch14 -p1 -b .output  NEEDED?
-#%patch15 -p1 -b .ia64_align  NEEDED?
+%patch12 -p1 -b .traffic_class
+#%patch13 -p1 -b .arping_timeout
+#%patch14 -p1 -b .output
+%patch15 -p1 -b .ia64_align
 %patch17 -p1 -b .format_not_a_string_literal_and_no_format_arguments
 %patch18 -p1 -b .in6_pktinfo
 %patch19 -p1 -b .icmp_return_messages
 %patch20 -p1 -b .dead-hosts
 %patch21 -p1 -b .optflags
-%patch22 -p0
+%patch22 -p1 -b .dos
 
 %build
 %serverbuild
