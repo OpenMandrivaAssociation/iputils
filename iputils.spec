@@ -1,4 +1,4 @@
-%define version 20100418
+%define version 20101006
 %define distname %{name}-s%{version}
 
 Summary:	Network monitoring tools including ping
@@ -34,7 +34,6 @@ Patch18:	iputils-s20100418-fix_in6_pktinfo.patch
 Patch19:	iputils-s20100418-icmp_return_messages.patch
 Patch20:	iputils-s20100418-fix_ping_stats_for_dead_hosts.patch
 Patch21:	iputils-s20100418-addoptlags.patch
-Patch22:	iputils-s20100418-dos.patch
 BuildRequires:	docbook-dtd31-sgml
 BuildRequires:	libidn-devel
 BuildRequires:	libsysfs-devel
@@ -75,7 +74,6 @@ cp %{SOURCE3} .
 %patch19 -p1 -b .icmp_return_messages
 %patch20 -p1 -b .dead-hosts
 %patch21 -p1 -b .optflags
-%patch22 -p1 -b .dos
 
 %build
 %serverbuild
