@@ -1,4 +1,4 @@
-%define version s20121011
+%define version 20121011
 %define distname %{name}-s%{version}
 
 Summary:	Network monitoring tools including ping
