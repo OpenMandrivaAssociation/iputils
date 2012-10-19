@@ -1,10 +1,10 @@
-%define version 20101006
+%define version s20121011
 %define distname %{name}-s%{version}
 
 Summary:	Network monitoring tools including ping
 Name:		iputils
 Version:	%{version}
-Release:	%mkrel 2
+Release:	1
 License:	BSD
 Group:		System/Base
 URL:		http://linux-net.osdl.org/index.php/Iputils
@@ -41,7 +41,6 @@ BuildRequires:	perl-SGMLSpm
 BuildRequires:	openssl-devel
 Conflicts:	xinetd < 2.1.8.9pre14-2mdk
 Conflicts:	apparmor-profiles < 2.1-1.961.5mdv2008.0
-BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
 %description
 The iputils package contains ping, a basic networking tool. The ping command
@@ -49,7 +48,6 @@ sends a series of ICMP protocol ECHO_REQUEST packets to a specified network
 host and can tell you if that machine is alive and receiving network traffic.
 
 %prep
-
 %setup -q -n %{distname}
 
 cp %{SOURCE1} .
@@ -84,8 +82,6 @@ perl -pi -e 's!\$\(MAKE\) -C doc html!!g' Makefile
 make man
 
 %install
-rm -rf %{buildroot}
-
 install -d %{buildroot}%{_sbindir}
 install -d %{buildroot}%{_bindir}
 install -d %{buildroot}/{bin,sbin}
@@ -121,11 +117,7 @@ if [ -x /sbin/apparmor_parser ]; then
         /sbin/service apparmor condreload
 fi
 
-%clean
-rm -rf %{buildroot}
-
 %files
-%defattr(-,root,root)
 %doc RELNOTES bonding.txt
 %config(noreplace) %{_sysconfdir}/apparmor.d/bin.ping
 %{_sbindir}/clockdiff
