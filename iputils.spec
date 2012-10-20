@@ -36,7 +36,7 @@ Patch20:	iputils-s20100418-fix_ping_stats_for_dead_hosts.patch
 Patch21:	iputils-s20100418-addoptlags.patch
 BuildRequires:	docbook-dtd31-sgml
 BuildRequires:	libidn-devel
-BuildRequires:	libsysfs-devel
+BuildRequires:	sysfsutils-devel
 BuildRequires:	perl-SGMLSpm
 BuildRequires:	openssl-devel
 Conflicts:	xinetd < 2.1.8.9pre14-2mdk
