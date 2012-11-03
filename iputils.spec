@@ -23,7 +23,7 @@ Patch6:		iputils-20020927-addrcache.patch
 Patch7:		iputils-20020927-ping-subint.patch
 Patch9:		iputils-ifenslave.patch
 Patch10:	iputils-s20100418-arping-infiniband.patch
-Patch11:	iputils-s20100418-idn.patch
+Patch11:	iputils-20121011-idn.patch
 Patch12:	iputils-20070202-traffic_class.patch
 Patch13:	iputils-s20100418-arping_timeout.patch
 Patch14:	iputils-20071127-output.patch
@@ -56,7 +56,7 @@ cp %{SOURCE3} .
 
 %patch0 -p0 -b .s_addr
 %patch2 -p1 -b .ping_sparcfix
-%patch3 -p1 -b .rdisc-server
+#patch3 -p1 -b .rdisc-server
 %patch4 -p1 -b .counter
 %patch6 -p1 -b .addrcache
 %patch7 -p1 -b .ping-subint
