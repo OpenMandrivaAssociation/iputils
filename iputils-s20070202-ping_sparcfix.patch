@@ -1,0 +1,43 @@
+--- iputils-s20070202/ping_common.c.ping_sparcfix	2007-02-02 13:55:46.000000000 +0100
++++ iputils-s20070202/ping_common.c	2007-04-20 17:44:20.000000000 +0200
+@@ -39,16 +39,16 @@
+ int working_recverr;
+ 
+ /* timing */
+-int timing;			/* flag to do timing */
+-long tmin = LONG_MAX;		/* minimum round trip time */
+-long tmax;			/* maximum round trip time */
++unsigned long long timing;			/* flag to do timing */
++unsigned long long tmin = LONG_MAX;		/* minimum round trip time */
++unsigned long long tmax;			/* maximum round trip time */
+ /* Message for rpm maintainers: have _shame_. If you want
+  * to fix something send the patch to me for sanity checking.
+  * "sparcfix" patch is a complete non-sense, apparenly the person
+  * prepared it was stoned.
+  */
+-long long tsum;			/* sum of all times, for doing average */
+-long long tsum2;
++unsigned long long tsum;			/* sum of all times, for doing average */
++unsigned long long tsum2;
+ int  pipesize = -1;
+ 
+ int datalen = DEFDATALEN;
+--- iputils-s20070202/ping_common.h.ping_sparcfix	2007-02-02 13:55:46.000000000 +0100
++++ iputils-s20070202/ping_common.h	2007-04-20 17:44:20.000000000 +0200
+@@ -104,11 +104,11 @@
+ 
+ 
+ /* timing */
+-extern int timing;			/* flag to do timing */
+-extern long tmin;			/* minimum round trip time */
+-extern long tmax;			/* maximum round trip time */
+-extern long long tsum;			/* sum of all times, for doing average */
+-extern long long tsum2;
++extern unsigned long long timing;		/* flag to do timing */
++extern unsigned long long tmin;			/* minimum round trip time */
++extern unsigned long long tmax;			/* maximum round trip time */
++extern unsigned long long tsum;			/* sum of all times, for doing average */
++extern unsigned long long tsum2;
+ extern int rtt;
+ extern __u16 acked;
+ extern int pipesize;

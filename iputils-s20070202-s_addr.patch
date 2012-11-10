@@ -1,0 +1,11 @@
+--- rdisc.c	2007-11-27 01:57:27.000000000 +0100
++++ rdisc.c.oden	2008-12-21 14:43:49.000000000 +0100
+@@ -875,7 +875,7 @@ pr_pack(char *buf, int cc, struct sockad
+ 				((max_adv_int - min_adv_int)
+ 				 * (random() % 1000)/1000);
+ 		} else {
+-			sin.sin_addr = ip->saddr;
++			sin.sin_addr.s_addr = ip->saddr;
+ 			if (!is_directly_connected(sin.sin_addr)) {
+ 				if (verbose)
+ 					logtrace("ICMP %s from %s: source not directly connected\n",

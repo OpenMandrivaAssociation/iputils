@@ -1,0 +1,6 @@
+sources:
+  "bin.ping.apparmor:"	b56352aa16229632ed4b8eca571921ed778e822c
+  "bonding.txt:"	02a8ae69658db5e3908e25549355ef3a488dbe52
+  "ifenslave.8:"	e29c3c26be685248c861926e54faabb20275f325
+  "ifenslave.c:"	1be98abaf1ee0fb7f1aff6011f033ecdc4e18919
+  "iputils-s20121011.tar.bz2:"	3e85179746fd93000d6267bd55addfe97f321ba7

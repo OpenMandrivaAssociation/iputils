@@ -1,0 +1,33 @@
+--- iputils-s20070202/rdisc.c.rdisc-server	2007-02-02 13:55:46.000000000 +0100
++++ iputils-s20070202/rdisc.c	2007-04-20 18:15:15.000000000 +0200
+@@ -63,6 +63,8 @@
+ 
+ #include "SNAPSHOT.h"
+ 
++#define RDISC_SERVER
++
+ struct interface
+ {
+ 	struct in_addr 	address;	/* Used to identify the interface */
+@@ -163,11 +165,8 @@
+ int debugfile;
+ 
+ char usage[] =
+-"Usage:	rdisc [-b] [-d] [-s] [-v] [-f] [-a] [-V] [send_address] [receive_address]\n"
+-#ifdef RDISC_SERVER
+-"       rdisc -r [-b] [-d] [-s] [-v] [-f] [-a] [-V] [-p <preference>] [-T <secs>] \n"
+-"		 [send_address] [receive_address]\n"
+-#endif
++"Usage:	rdisc -r [-b] [-d] [-s] [-v] [-f] [-a] [-V] [-p <preference>] [-T <secs>] \n"
++"                 [send_address] [receive_address]\n"
+ ;
+ 
+ 
+@@ -945,7 +944,6 @@
+ {
+ #ifdef RDISC_SERVER
+ 	if (responder) {
+-		int i;
+ 
+ 		/* Send out a packet with a preference so that all
+ 		 * hosts will know that we are dead.

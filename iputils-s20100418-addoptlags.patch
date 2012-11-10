@@ -1,0 +1,12 @@
+diff -Naur iputils-s20100418//Makefile iputils-s20100418.tpg//Makefile
+--- iputils-s20100418//Makefile	2010-04-18 04:45:45.000000000 +0000
++++ iputils-s20100418.tpg//Makefile	2010-08-22 14:34:41.000000000 +0000
+@@ -14,7 +14,7 @@
+ # What a pity, all new gccs are buggy and -Werror does not work. Sigh.
+ #CCOPT=-D_GNU_SOURCE -O2 -Wstrict-prototypes -Wall -g -Werror
+ CCOPT=-D_GNU_SOURCE -O2 -Wstrict-prototypes -Wall -g
+-CFLAGS=$(CCOPT) $(GLIBCFIX) $(DEFINES) 
++CFLAGS+=$(CCOPT) $(GLIBCFIX) $(DEFINES) $(OPTFLAGS)
+ 
+ IPV4_TARGETS=tracepath ping clockdiff rdisc arping tftpd rarpd
+ IPV6_TARGETS=tracepath6 traceroute6 ping6
