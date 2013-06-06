@@ -28,6 +28,7 @@ BuildRequires:	sysfsutils-devel
 BuildRequires:	cap-devel
 BuildRequires:	pkgconfig(libidn)
 BuildRequires:	pkgconfig(openssl)
+BuildRequires:	pkgconfig(gnutls)
 
 %description
 The iputils package contains ping, a basic networking tool. The ping command
