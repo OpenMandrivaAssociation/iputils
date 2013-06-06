@@ -25,6 +25,7 @@ BuildRequires:	docbook-dtd31-sgml
 BuildRequires:	perl-SGMLSpm
 BuildRequires:	pkgconfig(libidn)
 BuildRequires:	sysfsutils-devel
+BuildRequires:	cap-devel
 BuildRequires:	pkgconfig(libidn)
 BuildRequires:	pkgconfig(openssl)
 
