@@ -3,7 +3,7 @@
 Summary:	Network monitoring tools including ping
 Name:		iputils
 Version:	20121221
-Release:	3
+Release:	4
 License:	BSD
 Group:		System/Base
 URL:		http://linux-net.osdl.org/index.php/Iputils
