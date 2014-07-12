@@ -46,6 +46,7 @@ cp %{SOURCE3} .
 sed -i -e 's!\$\(MAKE\) -C doc html!!g' Makefile
 
 %build
+export CC=%{__cc}
 %serverbuild
 %make IDN="yes" OPTFLAGS="%{optflags} -fno-strict-aliasing"
 %make ifenslave CFLAGS="%{optflags}"
