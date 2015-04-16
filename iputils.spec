@@ -3,7 +3,7 @@
 Summary:	Network monitoring tools including ping
 Name:		iputils
 Version:	20121221
-Release:	8
+Release:	9
 License:	BSD
 Group:		System/Base
 URL:		http://linux-net.osdl.org/index.php/Iputils
@@ -36,7 +36,6 @@ sends a series of ICMP protocol ECHO_REQUEST packets to a specified network
 host and can tell you if that machine is alive and receiving network traffic.
 
 %prep
-
 %setup -qn %{distname}
 
 cp %{SOURCE1} .
@@ -58,9 +57,9 @@ install -d %{buildroot}%{_sbindir}
 install -d %{buildroot}%{_bindir}
 install -d %{buildroot}%{_mandir}/man8
 
-install -c clockdiff		%{buildroot}%{_sbindir}/
+install -c clockdiff %{buildroot}%{_sbindir}/
 
-install -c arping %{buildroot}%{_sbindir}/
+install -c arping -D %{buildroot}/sbin/arping
 
 install -c ping %{buildroot}%{_bindir}/
 install -c ifenslave %{buildroot}%{_sbindir}/
@@ -92,7 +91,7 @@ fi
 %config(noreplace) %{_sysconfdir}/apparmor.d/bin.ping
 %{_sbindir}/clockdiff
 %attr(4755,root,root)	%{_bindir}/ping
-%{_sbindir}/arping
+/sbin/arping
 %{_sbindir}/ifenslave
 #%ifnarch ppc
 %attr(4755,root,root) %{_bindir}/ping6
