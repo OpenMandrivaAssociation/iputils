@@ -76,7 +76,6 @@ install -c arping -D %{buildroot}/sbin/arping
 
 install -c ping %{buildroot}%{_bindir}/
 install -c ifenslave %{buildroot}%{_sbindir}/
-install -c ping6 %{buildroot}%{_bindir}/
 install -c rdisc %{buildroot}%{_sbindir}/
 install -c tracepath %{buildroot}%{_sbindir}/
 install -c tracepath6 %{buildroot}%{_sbindir}/
@@ -84,6 +83,12 @@ install -c traceroute6 %{buildroot}%{_sbindir}/
 
 install -c doc/*.8 %{buildroot}%{_mandir}/man8/
 install -c ifenslave.8 %{buildroot}%{_mandir}/man8/
+
+#(tpg) ping now support ping6
+ln -sf ../bin/ping %{buildroot}%{_sbindir}/ping6
+ln -sf ../bin/ping %{buildroot}%{_sbindir}/ping6
+ln -sf ../bin/tracepath %{buildroot}%{_sbindir}
+ln -sf ../bin/tracepath6 %{buildroot}%{_sbindir}
 
 # these manpages are provided by other packages
 rm -f %{buildroot}%{_mandir}/man8/rarpd.8*
