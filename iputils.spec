@@ -77,7 +77,6 @@ install -c clockdiff %{buildroot}%{_sbindir}/
 install -cp arping %{buildroot}%{_sbindir}/
 install -cp ping %{buildroot}%{_bindir}/
 install -cp rdisc %{buildroot}%{_sbindir}/
-install -cp ping6 %{buildroot}%{_bindir}/
 install -cp ifenslave %{buildroot}%{_sbindir}/
 install -cp tracepath %{buildroot}%{_sbindir}/
 install -cp tracepath6 %{buildroot}%{_sbindir}/
@@ -85,7 +84,7 @@ install -cp traceroute6 %{buildroot}%{_sbindir}/
 install -cp ninfod/ninfod %{buildroot}%{_sbindir}/
 
 mkdir -p %{buildroot}%{_bindir}
-ln -sf ../bin/ping6 %{buildroot}%{_sbindir}
+ln -sf ../bin/ping %{buildroot}%{_sbindir}/ping6
 ln -sf ../sbin/tracepath %{buildroot}%{_bindir}
 ln -sf ../sbin/tracepath6 %{buildroot}%{_bindir}
 ln -sf ../sbin/traceroute6 %{buildroot}%{_bindir}
@@ -139,7 +138,6 @@ fi
 %attr(0755,root,root) %{_sbindir}/arping
 %attr(4755,root,root) %{_sbindir}/traceroute6
 %attr(0755,root,root) %{_bindir}/ping
-%attr(0755,root,root) %{_bindir}/ping6
 /sbin/arping
 %{_sbindir}/ifenslave
 %{_sbindir}/rdisc
