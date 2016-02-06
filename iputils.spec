@@ -23,8 +23,6 @@ Patch3:		iputils-locale-i.patch
 Requires(pre):	filesystem >= 2.1.9-18
 BuildRequires:	docbook-dtd31-sgml
 BuildRequires:	perl-SGMLSpm
-BuildRequires:	pkgconfig(libidn)
-BuildRequires:	sysfsutils-devel
 BuildRequires:	cap-devel
 BuildRequires:	pkgconfig(libidn)
 BuildRequires:	pkgconfig(openssl)
@@ -67,8 +65,7 @@ pushd ninfod
 popd
 
 %make ifenslave CFLAGS="%{optflags}"
-%make man
-%make html
+make man
 
 %install
 mkdir -p %{buildroot}/sbin
