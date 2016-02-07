@@ -97,6 +97,7 @@ install -cp doc/arping.8 %{buildroot}%{_mandir}/man8/
 install -cp doc/ping.8 %{buildroot}%{_mandir}/man8/
 install -cp doc/rdisc.8 %{buildroot}%{_mandir}/man8/
 install -cp doc/tracepath.8 %{buildroot}%{_mandir}/man8/
+install -cp doc/traceroute6.8 %{buildroot}%{_mandir}/man8/
 install -cp doc/ninfod.8 %{buildroot}%{_mandir}/man8/
 install -c ifenslave.8 %{buildroot}%{_mandir}/man8/
 ln -s ping.8.gz %{buildroot}%{_mandir}/man8/ping6.8.gz
@@ -147,15 +148,15 @@ fi
 %{_sbindir}/tracepath
 %{_sbindir}/tracepath6
 %{_bindir}/traceroute6
-%attr(644,root,root) %{_mandir}/man8/clockdiff.8.gz
-%attr(644,root,root) %{_mandir}/man8/arping.8.gz
-%attr(644,root,root) %{_mandir}/man8/ping.8.gz
-%attr(644,root,root) %{_mandir}/man8/ping6.8.gz
-%attr(644,root,root) %{_mandir}/man8/rdisc.8.gz
-%attr(644,root,root) %{_mandir}/man8/tracepath.8.gz
-%attr(644,root,root) %{_mandir}/man8/tracepath6.8.gz
-%attr(644,root,root) %{_mandir}/man8/traceroute6.8.gz
-%attr(644,root,root) %{_mandir}/man8/ifenslave.8.gz
+%attr(644,root,root) %{_mandir}/man8/clockdiff.8.*
+%attr(644,root,root) %{_mandir}/man8/arping.8.*
+%attr(644,root,root) %{_mandir}/man8/ping.8.*
+%attr(644,root,root) %{_mandir}/man8/ping6.8.*
+%attr(644,root,root) %{_mandir}/man8/rdisc.8.*
+%attr(644,root,root) %{_mandir}/man8/tracepath.8.*
+%attr(644,root,root) %{_mandir}/man8/tracepath6.8.*
+%attr(644,root,root) %{_mandir}/man8/traceroute6.8.*
+%attr(644,root,root) %{_mandir}/man8/ifenslave.8.*
 
 %files ninfod
 %attr(0755,root,root) %{_sbindir}/ninfod
