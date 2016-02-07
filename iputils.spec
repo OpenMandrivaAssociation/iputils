@@ -162,4 +162,4 @@ fi
 %attr(0755,root,root) %{_sbindir}/ninfod
 %{_presetdir}/86-ninfod.preset
 %{_unitdir}/ninfod.service
-%attr(644,root,root) %{_mandir}/man8/ninfod.8.gz
+%attr(644,root,root) %{_mandir}/man8/ninfod.8.*
