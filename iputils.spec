@@ -2,7 +2,7 @@
 
 Summary:	Network monitoring tools including ping
 Name:		iputils
-Version:	20150815
+Version:	20160308
 Release:	1
 License:	BSD
 Group:		System/Base
@@ -18,9 +18,6 @@ Source5:	rdisc.service
 Source6:	ninfod.service
 Patch0:		iputils-rh.patch
 Patch1:		iputils-ifenslave.patch
-Patch3:		iputils-locale-i.patch
-
-Requires(pre):	filesystem >= 2.1.9-18
 BuildRequires:	docbook-dtd31-sgml
 BuildRequires:	perl-SGMLSpm
 BuildRequires:	cap-devel
@@ -28,9 +25,7 @@ BuildRequires:	pkgconfig(libidn)
 BuildRequires:	pkgconfig(openssl)
 BuildRequires:	pkgconfig(gnutls)
 BuildRequires:	systemd
-Requires(post):	rpm-helper
-Requires(preun):	rpm-helper
-Requires(postun):	rpm-helper
+Requires:	filesystem >= 2.1.9-18
 
 %description
 The iputils package contains ping, a basic networking tool. The ping command
@@ -123,12 +118,6 @@ EOF
 # apparmor profile
 mkdir -p %{buildroot}%{_sysconfdir}/apparmor.d/
 install -m 0644 %{SOURCE4} %{buildroot}%{_sysconfdir}/apparmor.d/bin.ping
-
-%posttrans
-# if we have apparmor installed, reload if it's being used
-if [ -x /sbin/apparmor_parser ]; then
-    /sbin/service apparmor condreload
-fi
 
 %files
 %doc RELNOTES bonding.txt
