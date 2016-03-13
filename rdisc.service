@@ -5,7 +5,7 @@ Documentation=man:rdisc
 
 [Service]
 Type=forking
-ExecStart=/sbin/rdisc -s
+ExecStart=/usr/sbin/rdisc -s
 
 [Install]
 WantedBy=multi-user.target
