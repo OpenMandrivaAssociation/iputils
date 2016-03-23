@@ -3,7 +3,7 @@
 Summary:	Network monitoring tools including ping
 Name:		iputils
 Version:	20160308
-Release:	1
+Release:	1.1
 License:	BSD
 Group:		System/Base
 URL:		https://github.com/iputils/iputils
@@ -119,6 +119,11 @@ EOF
 mkdir -p %{buildroot}%{_sysconfdir}/apparmor.d/
 install -m 0644 %{SOURCE4} %{buildroot}%{_sysconfdir}/apparmor.d/bin.ping
 
+%post
+if [ -x /usr/sbin/setcap ]; then
+    setcap cap_net_raw+ep /usr/bin/ping
+fi
+
 %files
 %doc RELNOTES bonding.txt
 %config(noreplace) %{_sysconfdir}/apparmor.d/bin.ping
@@ -128,6 +133,7 @@ install -m 0644 %{SOURCE4} %{buildroot}%{_sysconfdir}/apparmor.d/bin.ping
 %attr(0755,root,root) %{_sbindir}/arping
 %attr(4755,root,root) %{_sbindir}/traceroute6
 %attr(0755,root,root) %{_bindir}/ping
+
 /sbin/arping
 %{_sbindir}/ifenslave
 %{_sbindir}/rdisc
