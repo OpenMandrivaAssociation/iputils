@@ -3,7 +3,7 @@
 Summary:	Network monitoring tools including ping
 Name:		iputils
 Version:	20160308
-Release:	2
+Release:	3
 License:	BSD
 Group:		System/Base
 URL:		https://github.com/iputils/iputils
@@ -18,6 +18,7 @@ Source5:	rdisc.service
 Source6:	ninfod.service
 Patch0:		iputils-rh.patch
 Patch1:		iputils-ifenslave.patch
+Patch2:     iputils-reorder-I-parsing.patch
 BuildRequires:	docbook-dtd31-sgml
 BuildRequires:	perl-SGMLSpm
 BuildRequires:	cap-devel
@@ -109,7 +110,7 @@ install -D -m 644 %{SOURCE6} %{buildroot}%{_unitdir}/ninfod.service
 
 install -d %{buildroot}%{_presetdir}
 cat > %{buildroot}%{_presetdir}/86-rdisc.preset << EOF
-enable rdisc.service
+disable rdisc.service
 EOF
 
 cat > %{buildroot}%{_presetdir}/86-ninfod.preset << EOF
