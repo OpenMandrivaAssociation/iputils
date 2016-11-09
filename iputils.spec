@@ -2,8 +2,8 @@
 
 Summary:	Network monitoring tools including ping
 Name:		iputils
-Version:	20160308
-Release:	3
+Version:	20161105
+Release:	1
 License:	BSD
 Group:		System/Base
 URL:		https://github.com/iputils/iputils
@@ -18,7 +18,6 @@ Source5:	rdisc.service
 Source6:	ninfod.service
 Patch0:		iputils-rh.patch
 Patch1:		iputils-ifenslave.patch
-Patch2:     iputils-reorder-I-parsing.patch
 BuildRequires:	docbook-dtd31-sgml
 BuildRequires:	perl-SGMLSpm
 BuildRequires:	cap-devel
@@ -76,14 +75,12 @@ install -cp ping %{buildroot}%{_bindir}/
 install -cp rdisc %{buildroot}%{_sbindir}/
 install -cp ifenslave %{buildroot}%{_sbindir}/
 install -cp tracepath %{buildroot}%{_sbindir}/
-install -cp tracepath6 %{buildroot}%{_sbindir}/
 install -cp traceroute6 %{buildroot}%{_sbindir}/
 install -cp ninfod/ninfod %{buildroot}%{_sbindir}/
 
 mkdir -p %{buildroot}%{_bindir}
 ln -sf ../bin/ping %{buildroot}%{_sbindir}/ping6
 ln -sf ../sbin/tracepath %{buildroot}%{_bindir}
-ln -sf ../sbin/tracepath6 %{buildroot}%{_bindir}
 ln -sf ../sbin/traceroute6 %{buildroot}%{_bindir}
 # (tpg) compat symlink
 ln -sf ../sbin/arping %{buildroot}/sbin
@@ -98,7 +95,6 @@ install -cp doc/traceroute6.8 %{buildroot}%{_mandir}/man8/
 install -cp doc/ninfod.8 %{buildroot}%{_mandir}/man8/
 install -c ifenslave.8 %{buildroot}%{_mandir}/man8/
 ln -s ping.8.gz %{buildroot}%{_mandir}/man8/ping6.8.gz
-ln -s tracepath.8.gz %{buildroot}%{_mandir}/man8/tracepath6.8.gz
 
 iconv -f ISO88591 -t UTF8 RELNOTES -o RELNOTES.tmp
 touch -r RELNOTES RELNOTES.tmp
@@ -140,10 +136,8 @@ fi
 %{_sbindir}/ifenslave
 %{_sbindir}/rdisc
 %{_bindir}/tracepath
-%{_bindir}/tracepath6
 %{_sbindir}/ping6
 %{_sbindir}/tracepath
-%{_sbindir}/tracepath6
 %{_bindir}/traceroute6
 %attr(644,root,root) %{_mandir}/man8/clockdiff.8.*
 %attr(644,root,root) %{_mandir}/man8/arping.8.*
@@ -151,7 +145,6 @@ fi
 %attr(644,root,root) %{_mandir}/man8/ping6.8.*
 %attr(644,root,root) %{_mandir}/man8/rdisc.8.*
 %attr(644,root,root) %{_mandir}/man8/tracepath.8.*
-%attr(644,root,root) %{_mandir}/man8/tracepath6.8.*
 %attr(644,root,root) %{_mandir}/man8/traceroute6.8.*
 %attr(644,root,root) %{_mandir}/man8/ifenslave.8.*
 
