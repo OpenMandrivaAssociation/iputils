@@ -18,7 +18,6 @@ Source5:	rdisc.service
 Source6:	ninfod.service
 Patch0:		iputils-rh.patch
 Patch1:		iputils-ifenslave.patch
-Patch2:     iputils-reorder-I-parsing.patch
 BuildRequires:	docbook-dtd31-sgml
 BuildRequires:	perl-SGMLSpm
 BuildRequires:	cap-devel
