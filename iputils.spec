@@ -3,7 +3,7 @@
 Summary:	Network monitoring tools including ping
 Name:		iputils
 Version:	20161105
-Release:	1
+Release:	2
 License:	BSD
 Group:		System/Base
 URL:		https://github.com/iputils/iputils
@@ -24,9 +24,10 @@ BuildRequires:	cap-devel
 BuildRequires:	pkgconfig(libidn)
 BuildRequires:	pkgconfig(openssl)
 BuildRequires:	pkgconfig(gnutls)
-BuildRequires:	systemd
-Requires:	filesystem >= 2.1.9-18
+BuildRequires:	pkgconfig(systemd)
+Requires(post):	filesystem >= 2.1.9-18
 Requires(post):	libcap-utils
+Requires(post):	rpm-helper
 
 %description
 The iputils package contains ping, a basic networking tool. The ping command
