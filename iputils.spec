@@ -52,7 +52,12 @@ cp %{SOURCE3} .
 %apply_patches
 
 %build
+%ifarch %{ix86}
+# FIXME workaround for build failure at link time with clang 7.0-331886, binutils 2.30
+export CC=gcc
+%else
 export CC=%{__cc}
+%endif
 %serverbuild_hardened
 %make OPTFLAGS="%{optflags} -fno-strict-aliasing"
 
