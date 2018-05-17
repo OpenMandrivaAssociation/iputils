@@ -25,6 +25,7 @@ BuildRequires:	pkgconfig(libidn)
 BuildRequires:	pkgconfig(openssl)
 BuildRequires:	pkgconfig(gnutls)
 BuildRequires:	pkgconfig(systemd)
+BuildRequires:	systemd
 Requires(post):	filesystem >= 2.1.9-18
 Requires(post):	libcap-utils
 Requires(post):	rpm-helper
