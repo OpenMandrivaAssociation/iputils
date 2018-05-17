@@ -3,7 +3,7 @@
 Summary:	Network monitoring tools including ping
 Name:		iputils
 Version:	20161105
-Release:	2
+Release:	3
 License:	BSD
 Group:		System/Base
 URL:		https://github.com/iputils/iputils
@@ -19,7 +19,7 @@ Source6:	ninfod.service
 Patch0:		iputils-rh.patch
 Patch1:		iputils-ifenslave.patch
 BuildRequires:	docbook-dtd31-sgml
-BuildRequires:	perl-SGMLSpm
+BuildRequires:	perl-SGMLSpm >= 1.1-2
 BuildRequires:	cap-devel
 BuildRequires:	pkgconfig(libidn)
 BuildRequires:	pkgconfig(openssl)
