@@ -21,7 +21,7 @@ Patch1:		iputils-ifenslave.patch
 BuildRequires:	docbook-dtd31-sgml
 BuildRequires:	perl-SGMLSpm >= 1.1-2
 BuildRequires:	cap-devel
-BuildRequires:	pkgconfig(libidn)
+BuildRequires:	pkgconfig(libidn2)
 BuildRequires:	pkgconfig(openssl)
 BuildRequires:	pkgconfig(gnutls)
 BuildRequires:	pkgconfig(systemd)
