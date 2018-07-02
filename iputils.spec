@@ -64,10 +64,10 @@ export CC=%{__cc}
 %serverbuild_hardened
 %make OPTFLAGS="%{optflags} -fno-strict-aliasing"
 
-pushd ninfod
+cd ninfod
 %configure
 %make
-popd
+cd -
 
 %make ifenslave CFLAGS="%{optflags}"
 make man
@@ -105,10 +105,6 @@ install -cp doc/ninfod.8 %{buildroot}%{_mandir}/man8/
 install -c ifenslave.8 %{buildroot}%{_mandir}/man8/
 ln -s ping.8.gz %{buildroot}%{_mandir}/man8/ping6.8.gz
 
-iconv -f ISO88591 -t UTF8 RELNOTES -o RELNOTES.tmp
-touch -r RELNOTES RELNOTES.tmp
-mv -f RELNOTES.tmp RELNOTES
-
 #(tpg) systemd support
 install -D -m 644 %{SOURCE5} %{buildroot}%{_unitdir}/rdisc.service
 install -D -m 644 %{SOURCE6} %{buildroot}%{_unitdir}/ninfod.service
@@ -132,7 +128,7 @@ if [ -x /usr/sbin/setcap ]; then
 fi
 
 %files
-%doc RELNOTES bonding.txt
+%doc README.md bonding.txt
 %config(noreplace) %{_sysconfdir}/apparmor.d/bin.ping
 %{_presetdir}/86-rdisc.preset
 %{_unitdir}/rdisc.service
