@@ -27,6 +27,7 @@ BuildRequires:	pkgconfig(gnutls)
 BuildRequires:	pkgconfig(systemd)
 BuildRequires:	systemd
 BuildRequires:	xsltproc
+BuildRequires:	docbook-style-xsl
 Requires(post):	filesystem >= 2.1.9-18
 Requires(post):	libcap-utils
 Requires(post):	rpm-helper
