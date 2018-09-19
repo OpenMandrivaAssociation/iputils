@@ -3,7 +3,7 @@
 Summary:	Network monitoring tools including ping
 Name:		iputils
 Version:	20180629
-Release:	2
+Release:	3
 License:	BSD
 Group:		System/Base
 URL:		https://github.com/iputils/iputils
@@ -25,7 +25,7 @@ BuildRequires:	pkgconfig(libidn2)
 BuildRequires:	pkgconfig(openssl)
 BuildRequires:	pkgconfig(gnutls)
 BuildRequires:	pkgconfig(systemd)
-BuildRequires:	systemd
+BuildRequires:	systemd-macros
 BuildRequires:	xsltproc
 BuildRequires:	docbook-style-xsl
 Requires(post):	filesystem >= 2.1.9-18
@@ -124,7 +124,7 @@ install -m 0644 %{SOURCE4} %{buildroot}%{_sysconfdir}/apparmor.d/bin.ping
 
 %post
 if [ -x /usr/sbin/setcap ]; then
-    setcap cap_net_raw+ep /usr/bin/ping
+    setcap cap_net_raw+ep /usr/bin/ping ||:
 fi
 
 %files
