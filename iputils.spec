@@ -3,7 +3,7 @@
 Summary:	Network monitoring tools including ping
 Name:		iputils
 Version:	20180629
-Release:	3
+Release:	4
 License:	BSD
 Group:		System/Base
 URL:		https://github.com/iputils/iputils
@@ -47,12 +47,12 @@ Node Information Query (RFC4620) daemon. Responds to IPv6 Node Information
 Queries.
 
 %prep
-%setup -qn %{distname}
+%autosetup -n %{distname} -p1
 
 cp %{SOURCE1} .
 cp %{SOURCE2} .
 cp %{SOURCE3} .
-%apply_patches
+
 
 %build
 %ifarch %{ix86}
@@ -62,14 +62,14 @@ export CC=gcc
 export CC=%{__cc}
 %endif
 %serverbuild_hardened
-%make OPTFLAGS="%{optflags} -fno-strict-aliasing"
+%make_build OPTFLAGS="%{optflags} -fno-strict-aliasing"
 
 cd ninfod
 %configure
-%make
+%make_build
 cd -
 
-%make ifenslave CFLAGS="%{optflags}"
+%make_build ifenslave CFLAGS="%{optflags}"
 make man
 
 %install
@@ -88,11 +88,11 @@ install -cp traceroute6 %{buildroot}%{_sbindir}/
 install -cp ninfod/ninfod %{buildroot}%{_sbindir}/
 
 mkdir -p %{buildroot}%{_bindir}
-ln -sf ../bin/ping %{buildroot}%{_sbindir}/ping6
-ln -sf ../sbin/tracepath %{buildroot}%{_bindir}
-ln -sf ../sbin/traceroute6 %{buildroot}%{_bindir}
+ln -sf %{_bindir}/ping %{buildroot}%{_sbindir}/ping6
+ln -sf %{_sbindir}/tracepath %{buildroot}%{_bindir}/tracepath
+ln -sf %{_sbindir}/traceroute6 %{buildroot}%{_bindir}/traceroute6
 # (tpg) compat symlink
-ln -sf ../sbin/arping %{buildroot}/sbin
+ln -sf %{_sbindir}/arping %{buildroot}/sbin/arping
 
 mkdir -p %{buildroot}%{_mandir}/man8
 install -cp doc/clockdiff.8 %{buildroot}%{_mandir}/man8/
