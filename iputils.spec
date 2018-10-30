@@ -3,7 +3,7 @@
 Summary:	Network monitoring tools including ping
 Name:		iputils
 Version:	20180629
-Release:	4
+Release:	5
 License:	BSD
 Group:		System/Base
 URL:		https://github.com/iputils/iputils
