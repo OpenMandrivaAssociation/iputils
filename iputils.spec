@@ -47,12 +47,13 @@ Node Information Query (RFC4620) daemon. Responds to IPv6 Node Information
 Queries.
 
 %prep
-%autosetup -n %{distname} -p1
+%setup -n %{distname}
 
 cp %{SOURCE1} .
 cp %{SOURCE2} .
 cp %{SOURCE3} .
 
+%autopatch -p1
 
 %build
 %ifarch %{ix86}
