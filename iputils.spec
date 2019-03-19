@@ -63,7 +63,7 @@ export CC=gcc
 export CC=%{__cc}
 %endif
 %serverbuild_hardened
-%make_build OPTFLAGS="%{optflags} -fno-strict-aliasing"
+%make_build OPTFLAGS="%{optflags} -fno-strict-aliasing -fPIC"
 
 cd ninfod
 %configure
