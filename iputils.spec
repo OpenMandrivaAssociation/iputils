@@ -70,7 +70,7 @@ cd ninfod
 %make_build
 cd -
 
-%make_build ifenslave CFLAGS="%{optflags}"
+%make_build ifenslave CFLAGS="%{optflags} -fPIC"
 make man
 
 %install
