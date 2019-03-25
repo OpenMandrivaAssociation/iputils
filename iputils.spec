@@ -2,8 +2,8 @@
 
 Summary:	Network monitoring tools including ping
 Name:		iputils
-Version:	20180629
-Release:	7
+Version:	20190324
+Release:	1
 License:	BSD
 Group:		System/Base
 URL:		https://github.com/iputils/iputils
@@ -28,6 +28,7 @@ BuildRequires:	pkgconfig(systemd)
 BuildRequires:	systemd-macros
 BuildRequires:	xsltproc
 BuildRequires:	docbook-style-xsl
+BuildRequires:	meson
 Requires(post):	filesystem >= 2.1.9-18
 Requires(post):	libcap-utils
 Requires(post):	rpm-helper
@@ -63,12 +64,8 @@ export CC=gcc
 export CC=%{__cc}
 %endif
 %serverbuild_hardened
-%make_build OPTFLAGS="%{optflags} -fno-strict-aliasing -fPIC"
-
-cd ninfod
-%configure
-%make_build
-cd -
+%meson
+%meson_build
 
 %make_build ifenslave CFLAGS="%{optflags} -fPIC"
 make man
