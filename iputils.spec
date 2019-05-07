@@ -30,7 +30,7 @@ BuildRequires:	pkgconfig(gnutls)
 BuildRequires:	systemd-macros
 BuildRequires:	xsltproc
 BuildRequires:	docbook-style-xsl
-BuildRequires:	meson
+BuildRequires:	meson cmake
 Requires(post):	filesystem >= 2.1.9-18
 Requires(post):	libcap-utils
 Requires(post):	rpm-helper
@@ -71,7 +71,6 @@ export CC=%{__cc}
 %meson_build
 
 %make_build ifenslave CFLAGS="%{optflags} -fPIC"
-make man
 
 %install
 mkdir -p %{buildroot}/sbin
