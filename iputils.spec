@@ -16,15 +16,17 @@ Source3:	ifenslave.8
 Source4:	bin.ping.apparmor
 Source5:	rdisc.service
 Source6:	ninfod.service
-Patch0:		iputils-rh.patch
-Patch1:		iputils-ifenslave.patch
+# https://github.com/iputils/iputils/pull/173
+Patch1:		0001-build-sys-make-rdisc.service-a-regular-unit.patch
+# https://github.com/iputils/iputils/commit/c503834519d21973323980850431101f90e663ef
+Patch2:		0002-doc-Use-namespace-correctly.patch
+Patch3:		iputils-ifenslave.patch
 BuildRequires:	docbook-dtd31-sgml
 BuildRequires:	perl-SGMLSpm >= 1.1-2
 BuildRequires:	cap-devel
 BuildRequires:	pkgconfig(libidn2)
 BuildRequires:	pkgconfig(openssl)
 BuildRequires:	pkgconfig(gnutls)
-BuildRequires:	pkgconfig(systemd)
 BuildRequires:	systemd-macros
 BuildRequires:	xsltproc
 BuildRequires:	docbook-style-xsl
@@ -64,7 +66,8 @@ export CC=gcc
 export CC=%{__cc}
 %endif
 %serverbuild_hardened
-%meson
+
+%meson -DBUILD_TFTPD=false -Dsystemunitdir="%{_unitdir}"
 %meson_build
 
 %make_build ifenslave CFLAGS="%{optflags} -fPIC"

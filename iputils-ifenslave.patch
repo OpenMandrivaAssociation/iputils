@@ -11,4 +11,3 @@
  
  	strcpy(ifr.ifr_name, ifname);
  	if (ioctl(skfd, SIOCGIFHWADDR, &ifr) < 0)
-  
