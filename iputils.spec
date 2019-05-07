@@ -73,41 +73,17 @@ export CC=%{__cc}
 %make_build ifenslave CFLAGS="%{optflags} -fPIC"
 
 %install
-mkdir -p %{buildroot}/sbin
-mkdir -p %{buildroot}%{_sbindir}
+%meson_install
 mkdir -p %{buildroot}%{_bindir}
-mkdir -p %{buildroot}%{_unitdir}
-
-install -c clockdiff %{buildroot}%{_sbindir}/
-install -cp arping %{buildroot}%{_sbindir}/
-install -cp ping %{buildroot}%{_bindir}/
-install -cp rdisc %{buildroot}%{_sbindir}/
-install -cp ifenslave %{buildroot}%{_sbindir}/
-install -cp tracepath %{buildroot}%{_sbindir}/
-install -cp traceroute6 %{buildroot}%{_sbindir}/
-install -cp ninfod/ninfod %{buildroot}%{_sbindir}/
-
-mkdir -p %{buildroot}%{_bindir}
+ln -sf %{_bindir}/ping %{buildroot}%{_sbindir}/ping
 ln -sf %{_bindir}/ping %{buildroot}%{_sbindir}/ping6
 ln -sf %{_sbindir}/tracepath %{buildroot}%{_bindir}/tracepath
 ln -sf %{_sbindir}/traceroute6 %{buildroot}%{_bindir}/traceroute6
 # (tpg) compat symlink
 ln -sf %{_sbindir}/arping %{buildroot}/sbin/arping
 
-mkdir -p %{buildroot}%{_mandir}/man8
-install -cp doc/clockdiff.8 %{buildroot}%{_mandir}/man8/
-install -cp doc/arping.8 %{buildroot}%{_mandir}/man8/
-install -cp doc/ping.8 %{buildroot}%{_mandir}/man8/
-install -cp doc/rdisc.8 %{buildroot}%{_mandir}/man8/
-install -cp doc/tracepath.8 %{buildroot}%{_mandir}/man8/
-install -cp doc/traceroute6.8 %{buildroot}%{_mandir}/man8/
-install -cp doc/ninfod.8 %{buildroot}%{_mandir}/man8/
-install -c ifenslave.8 %{buildroot}%{_mandir}/man8/
-ln -s ping.8.gz %{buildroot}%{_mandir}/man8/ping6.8.gz
-
-#(tpg) systemd support
-install -D -m 644 %{SOURCE5} %{buildroot}%{_unitdir}/rdisc.service
-install -D -m 644 %{SOURCE6} %{buildroot}%{_unitdir}/ninfod.service
+install -cp ifenslave %{buildroot}%{_sbindir}/
+install -cp ifenslave.8 %{buildroot}%{_mandir}/man8/
 
 install -d %{buildroot}%{_presetdir}
 cat > %{buildroot}%{_presetdir}/86-rdisc.preset << EOF
