@@ -74,7 +74,7 @@ export CC=%{__cc}
 
 %install
 %meson_install
-mkdir -p %{buildroot}{%{_sbindir},/sbin}
+mkdir -p %{buildroot}{%{_sbindir},/sbin,%{_mandir}/man8}
 ln -sf %{_bindir}/ping %{buildroot}%{_sbindir}/ping
 ln -sf %{_bindir}/ping %{buildroot}%{_sbindir}/ping6
 ln -sf %{_sbindir}/tracepath %{buildroot}%{_bindir}/tracepath
