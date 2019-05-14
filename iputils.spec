@@ -74,13 +74,13 @@ export CC=%{__cc}
 
 %install
 %meson_install
-mkdir -p %{buildroot}%{_bindir}
+mkdir -p %{buildroot}{%{_sbindir},/sbin}
 ln -sf %{_bindir}/ping %{buildroot}%{_sbindir}/ping
 ln -sf %{_bindir}/ping %{buildroot}%{_sbindir}/ping6
 ln -sf %{_sbindir}/tracepath %{buildroot}%{_bindir}/tracepath
 ln -sf %{_sbindir}/traceroute6 %{buildroot}%{_bindir}/traceroute6
 # (tpg) compat symlink
-ln -sf %{_sbindir}/arping %{buildroot}/sbin/arping
+ln -sf %{_bindir}/arping %{buildroot}/sbin/arping
 
 install -cp ifenslave %{buildroot}%{_sbindir}/
 install -cp ifenslave.8 %{buildroot}%{_mandir}/man8/
@@ -109,7 +109,7 @@ fi
 %{_presetdir}/86-rdisc.preset
 %{_unitdir}/rdisc.service
 %attr(0755,root,root) %{_sbindir}/clockdiff
-%attr(0755,root,root) %{_sbindir}/arping
+%attr(0755,root,root) %{_bindir}/arping
 %attr(4755,root,root) %{_sbindir}/traceroute6
 %attr(0755,root,root) %{_bindir}/ping
 
