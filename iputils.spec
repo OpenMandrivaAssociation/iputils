@@ -27,6 +27,7 @@ BuildRequires:	cap-devel
 BuildRequires:	pkgconfig(libidn2)
 BuildRequires:	pkgconfig(openssl)
 BuildRequires:	pkgconfig(gnutls)
+BuildRequires:	pkgconfig(libsystemd)
 BuildRequires:	systemd-macros
 BuildRequires:	xsltproc
 BuildRequires:	docbook-style-xsl
@@ -77,8 +78,8 @@ export CC=%{__cc}
 mkdir -p %{buildroot}{%{_sbindir},/sbin,%{_mandir}/man8}
 ln -sf %{_bindir}/ping %{buildroot}%{_sbindir}/ping
 ln -sf %{_bindir}/ping %{buildroot}%{_sbindir}/ping6
-ln -sf %{_sbindir}/tracepath %{buildroot}%{_bindir}/tracepath
-ln -sf %{_sbindir}/traceroute6 %{buildroot}%{_bindir}/traceroute6
+ln -sf %{_bindir}/tracepath %{buildroot}%{_sbindir}/tracepath
+ln -sf %{_bindir}/traceroute6 %{buildroot}%{_sbindir}/traceroute6
 # (tpg) compat symlink
 ln -sf %{_bindir}/arping %{buildroot}/sbin/arping
 
@@ -108,7 +109,7 @@ fi
 %config(noreplace) %{_sysconfdir}/apparmor.d/bin.ping
 %{_presetdir}/86-rdisc.preset
 %{_unitdir}/rdisc.service
-%attr(0755,root,root) %{_sbindir}/clockdiff
+%attr(0755,root,root) %{_bindir}/clockdiff
 %attr(0755,root,root) %{_bindir}/arping
 %attr(4755,root,root) %{_sbindir}/traceroute6
 %attr(0755,root,root) %{_bindir}/ping
@@ -116,10 +117,10 @@ fi
 /sbin/arping
 %{_sbindir}/ifenslave
 %{_sbindir}/rdisc
-%{_bindir}/tracepath
 %{_sbindir}/ping6
+%{_bindir}/tracepath
 %{_sbindir}/tracepath
-%{_bindir}/traceroute6
+%{_sbindir}/traceroute6
 %attr(644,root,root) %{_mandir}/man8/clockdiff.8.*
 %attr(644,root,root) %{_mandir}/man8/arping.8.*
 %attr(644,root,root) %{_mandir}/man8/ping.8.*
