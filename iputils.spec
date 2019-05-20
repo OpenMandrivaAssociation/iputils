@@ -16,10 +16,6 @@ Source3:	ifenslave.8
 Source4:	bin.ping.apparmor
 Source5:	rdisc.service
 Source6:	ninfod.service
-# https://github.com/iputils/iputils/pull/173
-Patch1:		0001-build-sys-make-rdisc.service-a-regular-unit.patch
-# https://github.com/iputils/iputils/commit/c503834519d21973323980850431101f90e663ef
-Patch2:		0002-doc-Use-namespace-correctly.patch
 Patch3:		iputils-ifenslave.patch
 BuildRequires:	docbook-dtd31-sgml
 BuildRequires:	perl-SGMLSpm >= 1.1-2
