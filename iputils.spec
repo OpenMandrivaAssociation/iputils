@@ -27,7 +27,9 @@ BuildRequires:	pkgconfig(libsystemd)
 BuildRequires:	systemd-macros
 BuildRequires:	xsltproc
 BuildRequires:	docbook-style-xsl
-BuildRequires:	meson cmake
+BuildRequires:	docbook-style-xsl-ns
+BuildRequires:	meson
+BuildRequires:	cmake
 Requires(post):	filesystem >= 2.1.9-18
 Requires(post):	libcap-utils
 Requires(post):	rpm-helper
