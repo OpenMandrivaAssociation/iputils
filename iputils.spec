@@ -17,7 +17,8 @@ Source4:	bin.ping.apparmor
 Source5:	rdisc.service
 Source6:	ninfod.service
 Patch3:		iputils-ifenslave.patch
-#Patch4:		iputils-s20190515-fix-xsl.patch
+Patch4:		iputils-s20190515-fix-xsl.patch
+BuildRequires:	docbook-style-xsl-ns
 BuildRequires:	docbook-dtd31-sgml
 BuildRequires:	perl-SGMLSpm >= 1.1-2
 BuildRequires:	cap-devel
