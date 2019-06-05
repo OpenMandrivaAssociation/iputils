@@ -16,7 +16,9 @@ Source3:	ifenslave.8
 Source4:	bin.ping.apparmor
 Patch3:		iputils-ifenslave.patch
 Patch4:		iputils-s20190515-fix-xsl.patch
-
+%ifarch riscv64
+BuildRequires:	atomic-devel
+%endif
 BuildRequires:	docbook-style-xsl-ns
 BuildRequires:	docbook-dtd31-sgml
 BuildRequires:	perl-SGMLSpm >= 1.1-2
@@ -58,12 +60,6 @@ cp %{SOURCE3} .
 %autopatch -p1
 
 %build
-%ifarch %{ix86}
-# FIXME workaround for build failure at link time with clang 7.0-331886, binutils 2.30
-export CC=gcc
-%else
-export CC=%{__cc}
-%endif
 %serverbuild_hardened
 
 %meson -DBUILD_TFTPD=false -Dsystemunitdir="%{_unitdir}"
