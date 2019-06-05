@@ -76,9 +76,11 @@ mkdir -p %{buildroot}{%{_sbindir},/sbin,%{_mandir}/man8}
 ln -sf %{_bindir}/ping %{buildroot}%{_sbindir}/ping
 ln -sf %{_bindir}/ping %{buildroot}%{_sbindir}/ping6
 ln -sf %{_bindir}/tracepath %{buildroot}%{_sbindir}/tracepath
-ln -sf %{_bindir}/traceroute6 %{buildroot}%{_sbindir}/traceroute6
+
 # (tpg) compat symlink
 ln -sf %{_bindir}/arping %{buildroot}/sbin/arping
+ln -sf %{_bindir}/arping %{buildroot}%{_sbindir}/arping
+ln -sf %{_bindir}/clockdiff %{buildroot}%{_sbindir}/clockdiff
 
 install -cp ifenslave %{buildroot}%{_sbindir}/
 install -cp ifenslave.8 %{buildroot}%{_mandir}/man8/
@@ -96,27 +98,30 @@ EOF
 mkdir -p %{buildroot}%{_sysconfdir}/apparmor.d/
 install -m 0644 %{SOURCE4} %{buildroot}%{_sysconfdir}/apparmor.d/bin.ping
 
+%find_lang %{name}
+
 %post
 if [ -x /usr/sbin/setcap ]; then
     setcap cap_net_raw+ep /usr/bin/ping ||:
 fi
 
-%files
+%files -f %{name}.lang
 %doc README.md bonding.txt
 %config(noreplace) %{_sysconfdir}/apparmor.d/bin.ping
 %{_presetdir}/86-rdisc.preset
-#%{_unitdir}/rdisc.service
+%{_unitdir}/rdisc.service
 %attr(0755,root,root) %{_bindir}/clockdiff
 %attr(0755,root,root) %{_bindir}/arping
 %attr(0755,root,root) %{_bindir}/ping
-
+%{_bindir}/tracepath
 /sbin/arping
+%{_sbindir}/arping
+%{_sbindir}/clockdiff
 %{_sbindir}/ifenslave
 %{_sbindir}/rdisc
+%{_sbindir}/ping
 %{_sbindir}/ping6
-%{_bindir}/tracepath
 %{_sbindir}/tracepath
-%{_sbindir}/traceroute6
 %attr(644,root,root) %{_mandir}/man8/clockdiff.8.*
 %attr(644,root,root) %{_mandir}/man8/arping.8.*
 %attr(644,root,root) %{_mandir}/man8/ping.8.*
