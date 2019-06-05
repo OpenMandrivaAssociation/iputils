@@ -14,15 +14,15 @@ Source1:	ifenslave.c
 Source2:	bonding.txt
 Source3:	ifenslave.8
 Source4:	bin.ping.apparmor
-Source5:	rdisc.service
-Source6:	ninfod.service
 Patch3:		iputils-ifenslave.patch
+Patch4:		iputils-s20190515-fix-xsl.patch
+
+BuildRequires:	docbook-style-xsl-ns
 BuildRequires:	docbook-dtd31-sgml
 BuildRequires:	perl-SGMLSpm >= 1.1-2
 BuildRequires:	cap-devel
 BuildRequires:	pkgconfig(libidn2)
 BuildRequires:	pkgconfig(openssl)
-BuildRequires:	pkgconfig(gnutls)
 BuildRequires:	pkgconfig(libsystemd)
 BuildRequires:	systemd-macros
 BuildRequires:	xsltproc
@@ -76,9 +76,11 @@ mkdir -p %{buildroot}{%{_sbindir},/sbin,%{_mandir}/man8}
 ln -sf %{_bindir}/ping %{buildroot}%{_sbindir}/ping
 ln -sf %{_bindir}/ping %{buildroot}%{_sbindir}/ping6
 ln -sf %{_bindir}/tracepath %{buildroot}%{_sbindir}/tracepath
-ln -sf %{_bindir}/traceroute6 %{buildroot}%{_sbindir}/traceroute6
+
 # (tpg) compat symlink
 ln -sf %{_bindir}/arping %{buildroot}/sbin/arping
+ln -sf %{_bindir}/arping %{buildroot}%{_sbindir}/arping
+ln -sf %{_bindir}/clockdiff %{buildroot}%{_sbindir}/clockdiff
 
 install -cp ifenslave %{buildroot}%{_sbindir}/
 install -cp ifenslave.8 %{buildroot}%{_mandir}/man8/
@@ -96,35 +98,35 @@ EOF
 mkdir -p %{buildroot}%{_sysconfdir}/apparmor.d/
 install -m 0644 %{SOURCE4} %{buildroot}%{_sysconfdir}/apparmor.d/bin.ping
 
+%find_lang %{name}
+
 %post
 if [ -x /usr/sbin/setcap ]; then
     setcap cap_net_raw+ep /usr/bin/ping ||:
 fi
 
-%files
+%files -f %{name}.lang
 %doc README.md bonding.txt
 %config(noreplace) %{_sysconfdir}/apparmor.d/bin.ping
 %{_presetdir}/86-rdisc.preset
 %{_unitdir}/rdisc.service
 %attr(0755,root,root) %{_bindir}/clockdiff
 %attr(0755,root,root) %{_bindir}/arping
-%attr(4755,root,root) %{_sbindir}/traceroute6
 %attr(0755,root,root) %{_bindir}/ping
-
+%{_bindir}/tracepath
 /sbin/arping
+%{_sbindir}/arping
+%{_sbindir}/clockdiff
 %{_sbindir}/ifenslave
 %{_sbindir}/rdisc
+%{_sbindir}/ping
 %{_sbindir}/ping6
-%{_bindir}/tracepath
 %{_sbindir}/tracepath
-%{_sbindir}/traceroute6
 %attr(644,root,root) %{_mandir}/man8/clockdiff.8.*
 %attr(644,root,root) %{_mandir}/man8/arping.8.*
 %attr(644,root,root) %{_mandir}/man8/ping.8.*
-%attr(644,root,root) %{_mandir}/man8/ping6.8.*
 %attr(644,root,root) %{_mandir}/man8/rdisc.8.*
 %attr(644,root,root) %{_mandir}/man8/tracepath.8.*
-%attr(644,root,root) %{_mandir}/man8/traceroute6.8.*
 %attr(644,root,root) %{_mandir}/man8/ifenslave.8.*
 
 %files ninfod

@@ -1,0 +1,12 @@
+diff -Naur iputils-s20190515/doc/meson.build iputils-s20190515.tpg/doc/meson.build
+--- iputils-s20190515/doc/meson.build	2019-05-15 20:14:10.000000000 +0000
++++ iputils-s20190515.tpg/doc/meson.build	2019-05-25 20:10:30.815620857 +0000
+@@ -48,7 +48,7 @@
+ ]
+ 
+ if xsltproc.found()
+-	xsl = 'http://docbook.sourceforge.net/release/xsl/current/manpages/docbook.xsl'
++	xsl = 'http://docbook.sourceforge.net/release/xsl-ns/current/manpages/docbook.xsl'
+ 	testrun = run_command([xsltproc, '--nonet', xsl])
+ 	xsltproc_works = testrun.returncode() == 0
+ 	if xsltproc_works == false
