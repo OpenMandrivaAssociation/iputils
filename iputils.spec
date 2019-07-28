@@ -15,7 +15,6 @@ Source2:	bonding.txt
 Source3:	ifenslave.8
 Source4:	bin.ping.apparmor
 Patch3:		iputils-ifenslave.patch
-Patch4:		iputils-s20190515-fix-xsl.patch
 %ifarch riscv64
 BuildRequires:	atomic-devel
 %endif
