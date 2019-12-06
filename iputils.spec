@@ -1,9 +1,10 @@
 %define distname %{name}-s%{version}
+%global optflags %{optflags} -Oz
 
 Summary:	Network monitoring tools including ping
 Name:		iputils
 Version:	20190709
-Release:	1
+Release:	2
 License:	BSD
 Group:		System/Base
 URL:		https://github.com/iputils/iputils
