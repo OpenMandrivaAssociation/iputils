@@ -1,0 +1,32 @@
+diff -up iputils-s20190709/ninfod/ninfod.c.omv~ iputils-s20190709/ninfod/ninfod.c
+--- iputils-s20190709/ninfod/ninfod.c.omv~	2020-07-29 23:18:58.716216831 +0200
++++ iputils-s20190709/ninfod/ninfod.c	2020-07-29 23:19:14.677269439 +0200
+@@ -454,7 +454,7 @@ static void do_daemonize(void)
+ /* --------- */
+ #ifdef HAVE_LIBCAP
+ static const cap_value_t cap_net_raw = CAP_NET_RAW;
+-static const cap_value_t cap_setuid =  CAP_SETUID; 
++static const cap_value_t capsetuid =  CAP_SETUID; 
+ static cap_flag_value_t cap_ok;
+ #else
+ static uid_t euid;
+@@ -486,7 +486,7 @@ static void limit_capabilities(void)
+ 
+ 	cap_get_flag(cap_cur_p, CAP_SETUID, CAP_PERMITTED, &cap_ok);
+ 	if (cap_ok != CAP_CLEAR)
+-		cap_set_flag(cap_p, CAP_PERMITTED, 1, &cap_setuid, CAP_SET);
++		cap_set_flag(cap_p, CAP_PERMITTED, 1, &capsetuid, CAP_SET);
+ 
+ 	if (cap_set_proc(cap_p) < 0) {
+ 		DEBUG(LOG_ERR, "cap_set_proc: %s\n", strerror(errno));
+@@ -519,8 +519,8 @@ static void drop_capabilities(void)
+ 
+ 	/* setuid / setuid */
+ 	if (cap_ok != CAP_CLEAR) {
+-		cap_set_flag(cap_p, CAP_PERMITTED, 1, &cap_setuid, CAP_SET);
+-		cap_set_flag(cap_p, CAP_EFFECTIVE, 1, &cap_setuid, CAP_SET);
++		cap_set_flag(cap_p, CAP_PERMITTED, 1, &capsetuid, CAP_SET);
++		cap_set_flag(cap_p, CAP_EFFECTIVE, 1, &capsetuid, CAP_SET);
+ 
+ 		if (cap_set_proc(cap_p) < 0) {
+ 			DEBUG(LOG_ERR, "cap_set_proc: %s\n", strerror(errno));

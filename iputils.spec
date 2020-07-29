@@ -4,7 +4,7 @@
 Summary:	Network monitoring tools including ping
 Name:		iputils
 Version:	20190709
-Release:	2
+Release:	3
 License:	BSD
 Group:		System/Base
 URL:		https://github.com/iputils/iputils
@@ -15,6 +15,7 @@ Source1:	ifenslave.c
 Source2:	bonding.txt
 Source3:	ifenslave.8
 Source4:	bin.ping.apparmor
+Patch2:		iputils-20190709-compile.patch
 Patch3:		iputils-ifenslave.patch
 %ifarch riscv64
 BuildRequires:	atomic-devel
