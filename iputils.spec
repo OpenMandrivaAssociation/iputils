@@ -3,8 +3,8 @@
 
 Summary:	Network monitoring tools including ping
 Name:		iputils
-Version:	20190709
-Release:	3
+Version:	20200821
+Release:	1
 License:	BSD
 Group:		System/Base
 URL:		https://github.com/iputils/iputils
@@ -26,7 +26,6 @@ BuildRequires:	perl-SGMLSpm >= 1.1-2
 BuildRequires:	cap-devel
 BuildRequires:	libcap-utils
 BuildRequires:	pkgconfig(libidn2)
-BuildRequires:	pkgconfig(openssl)
 BuildRequires:	pkgconfig(libsystemd)
 BuildRequires:	systemd-macros
 BuildRequires:	xsltproc
