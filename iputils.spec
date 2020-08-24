@@ -19,6 +19,7 @@ Patch3:		iputils-ifenslave.patch
 %ifarch riscv64
 BuildRequires:	atomic-devel
 %endif
+BuildRequires:	intltool
 BuildRequires:	docbook-style-xsl-ns
 BuildRequires:	docbook-dtd31-sgml
 BuildRequires:	perl-SGMLSpm >= 1.1-2
