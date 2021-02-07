@@ -1,14 +1,13 @@
-%define distname %{name}-s%{version}
 %global optflags %{optflags} -Oz
 
 Summary:	Network monitoring tools including ping
 Name:		iputils
-Version:	20200821
+Version:	20210202
 Release:	1
 License:	BSD
 Group:		System/Base
 URL:		https://github.com/iputils/iputils
-Source0:	https://codeload.github.com/iputils/iputils/%{distname}.tar.gz
+Source0:	https://codeload.github.com/iputils/iputils/%{name}-%{version}.tar.gz
 # ifenslave.c seems to come from linux-2.6.25/Documentation/networking/ifenslave.c
 Source1:	ifenslave.c
 # bonding.txt seems to come from linux-2.6.25/Documentation/networking/bonding.txt
@@ -51,13 +50,11 @@ Node Information Query (RFC4620) daemon. Responds to IPv6 Node Information
 Queries.
 
 %prep
-%setup -n %{distname}
+%autosetup -p1
 
 cp %{SOURCE1} .
 cp %{SOURCE2} .
 cp %{SOURCE3} .
-
-%autopatch -p1
 
 %build
 %serverbuild_hardened
