@@ -3,7 +3,7 @@
 Summary:	Network monitoring tools including ping
 Name:		iputils
 Version:	20210202
-Release:	1
+Release:	2
 License:	BSD
 Group:		System/Base
 URL:		https://github.com/iputils/iputils
@@ -33,7 +33,6 @@ BuildRequires:	meson
 BuildRequires:	cmake
 Requires(post):	filesystem >= 2.1.9-18
 Requires(post):	libcap-utils
-Requires(post):	rpm-helper
 
 %description
 The iputils package contains ping, a basic networking tool. The ping command
