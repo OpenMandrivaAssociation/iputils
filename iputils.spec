@@ -1,9 +1,10 @@
-%global optflags %{optflags} -Oz
+%global optflags %{optflags} -Oz -fpie
+%global build_ldflags %{build_ldflags} -pie -Wl,-z,relro,-z,now
 
 Summary:	Network monitoring tools including ping
 Name:		iputils
-Version:	20210202
-Release:	2
+Version:	20210722
+Release:	1
 License:	BSD
 Group:		System/Base
 URL:		https://github.com/iputils/iputils
@@ -18,6 +19,7 @@ Patch3:		iputils-ifenslave.patch
 %ifarch riscv64
 BuildRequires:	atomic-devel
 %endif
+BuildRequires:	iproute
 BuildRequires:	intltool
 BuildRequires:	docbook-style-xsl-ns
 BuildRequires:	docbook-dtd31-sgml
@@ -26,13 +28,13 @@ BuildRequires:	cap-devel
 BuildRequires:	libcap-utils
 BuildRequires:	pkgconfig(libidn2)
 BuildRequires:	pkgconfig(libsystemd)
-BuildRequires:	systemd-macros
+BuildRequires:	systemd-rpm-macros
 BuildRequires:	xsltproc
 BuildRequires:	docbook-style-xsl
 BuildRequires:	meson
 BuildRequires:	cmake
 Requires(post):	filesystem >= 2.1.9-18
-Requires(post):	libcap-utils
+%{?systemd_ordering}
 
 %description
 The iputils package contains ping, a basic networking tool. The ping command
@@ -58,9 +60,7 @@ cp %{SOURCE3} .
 %autopatch -p1
 
 %build
-%serverbuild_hardened
-
-%meson -DBUILD_TFTPD=false -Dsystemunitdir="%{_unitdir}"
+%meson -DBUILD_TFTPD=false
 %meson_build
 
 %make_build ifenslave CFLAGS="%{optflags} -fPIC"
@@ -95,18 +95,13 @@ install -m 0644 %{SOURCE4} %{buildroot}%{_sysconfdir}/apparmor.d/bin.ping
 
 %find_lang %{name}
 
-%post
-if [ -x /usr/sbin/setcap ]; then
-    setcap cap_net_raw+ep /usr/bin/ping ||:
-fi
-
 %files -f %{name}.lang
 %doc README.md bonding.txt
 %config(noreplace) %{_sysconfdir}/apparmor.d/bin.ping
 %{_presetdir}/86-rdisc.preset
 %{_unitdir}/rdisc.service
-%attr(0755,root,root) %{_bindir}/clockdiff
-%attr(0755,root,root) %{_bindir}/arping
+%attr(0755,root,root) %caps(cap_net_raw=p) %{_bindir}/clockdiff
+%attr(0755,root,root) %caps(cap_net_raw=p) %{_bindir}/arping
 %attr(0755,root,root) %{_bindir}/ping
 %{_bindir}/tracepath
 /sbin/arping
@@ -117,15 +112,15 @@ fi
 %{_sbindir}/ping
 %{_sbindir}/ping6
 %{_sbindir}/tracepath
-%attr(644,root,root) %{_mandir}/man8/clockdiff.8.*
-%attr(644,root,root) %{_mandir}/man8/arping.8.*
-%attr(644,root,root) %{_mandir}/man8/ping.8.*
-%attr(644,root,root) %{_mandir}/man8/rdisc.8.*
-%attr(644,root,root) %{_mandir}/man8/tracepath.8.*
-%attr(644,root,root) %{_mandir}/man8/ifenslave.8.*
+%doc %attr(644,root,root) %{_mandir}/man8/clockdiff.8.*
+%doc %attr(644,root,root) %{_mandir}/man8/arping.8.*
+%doc %attr(644,root,root) %{_mandir}/man8/ping.8.*
+%doc %attr(644,root,root) %{_mandir}/man8/rdisc.8.*
+%doc %attr(644,root,root) %{_mandir}/man8/tracepath.8.*
+%doc %attr(644,root,root) %{_mandir}/man8/ifenslave.8.*
 
 %files ninfod
 %attr(0755,root,root) %{_sbindir}/ninfod
 %{_presetdir}/86-ninfod.preset
 %{_unitdir}/ninfod.service
-%attr(644,root,root) %{_mandir}/man8/ninfod.8.*
+%doc %attr(644,root,root) %{_mandir}/man8/ninfod.8.*
