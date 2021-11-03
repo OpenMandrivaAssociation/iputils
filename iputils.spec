@@ -1,4 +1,4 @@
-%global optflags %{optflags} -Oz -fpie
+%global optflags %{optflags} -O2 -fpie
 %global build_ldflags %{build_ldflags} -pie -Wl,-z,relro,-z,now
 
 Summary:	Network monitoring tools including ping
