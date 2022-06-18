@@ -3,12 +3,12 @@
 
 Summary:	Network monitoring tools including ping
 Name:		iputils
-Version:	20210722
+Version:	20211215
 Release:	1
 License:	BSD
 Group:		System/Base
 URL:		https://github.com/iputils/iputils
-Source0:	https://codeload.github.com/iputils/iputils/%{name}-%{version}.tar.gz
+Source0:	https://github.com/iputils/iputils/archive/refs/tags/%{version}.tar.gz
 # ifenslave.c seems to come from linux-2.6.25/Documentation/networking/ifenslave.c
 Source1:	ifenslave.c
 # bonding.txt seems to come from linux-2.6.25/Documentation/networking/bonding.txt
@@ -19,7 +19,8 @@ Patch3:		iputils-ifenslave.patch
 %ifarch riscv64
 BuildRequires:	atomic-devel
 %endif
-BuildRequires:	iproute
+# The "ip" tool must be on PATH
+BuildRequires:	iproute >= 5.18.0-2
 BuildRequires:	intltool
 BuildRequires:	docbook-style-xsl-ns
 BuildRequires:	docbook-dtd31-sgml
@@ -60,24 +61,16 @@ cp %{SOURCE3} .
 %autopatch -p1
 
 %build
-%meson -DBUILD_TFTPD=false
+%meson
 %meson_build
 
 %make_build ifenslave CFLAGS="%{optflags} -fPIC"
 
 %install
 %meson_install
-mkdir -p %{buildroot}{%{_sbindir},/sbin,%{_mandir}/man8}
-ln -sf %{_bindir}/ping %{buildroot}%{_sbindir}/ping
-ln -sf %{_bindir}/ping %{buildroot}%{_sbindir}/ping6
-ln -sf %{_bindir}/tracepath %{buildroot}%{_sbindir}/tracepath
+mkdir -p %{buildroot}%{_mandir}/man8
 
-# (tpg) compat symlink
-ln -sf %{_bindir}/arping %{buildroot}/sbin/arping
-ln -sf %{_bindir}/arping %{buildroot}%{_sbindir}/arping
-ln -sf %{_bindir}/clockdiff %{buildroot}%{_sbindir}/clockdiff
-
-install -cp ifenslave %{buildroot}%{_sbindir}/
+install -cp ifenslave %{buildroot}%{_bindir}/
 install -cp ifenslave.8 %{buildroot}%{_mandir}/man8/
 
 install -d %{buildroot}%{_presetdir}
@@ -104,14 +97,9 @@ install -m 0644 %{SOURCE4} %{buildroot}%{_sysconfdir}/apparmor.d/bin.ping
 %attr(0755,root,root) %caps(cap_net_raw=p) %{_bindir}/arping
 %attr(0755,root,root) %{_bindir}/ping
 %{_bindir}/tracepath
-/sbin/arping
-%{_sbindir}/arping
-%{_sbindir}/clockdiff
-%{_sbindir}/ifenslave
-%{_sbindir}/rdisc
-%{_sbindir}/ping
-%{_sbindir}/ping6
-%{_sbindir}/tracepath
+%{_bindir}/ifenslave
+%{_bindir}/rdisc
+%{_bindir}/tracepath
 %doc %attr(644,root,root) %{_mandir}/man8/clockdiff.8.*
 %doc %attr(644,root,root) %{_mandir}/man8/arping.8.*
 %doc %attr(644,root,root) %{_mandir}/man8/ping.8.*
