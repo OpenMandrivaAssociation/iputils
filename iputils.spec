@@ -99,7 +99,6 @@ install -m 0644 %{SOURCE4} %{buildroot}%{_sysconfdir}/apparmor.d/bin.ping
 %{_bindir}/tracepath
 %{_bindir}/ifenslave
 %{_bindir}/rdisc
-%{_bindir}/tracepath
 %doc %attr(644,root,root) %{_mandir}/man8/clockdiff.8.*
 %doc %attr(644,root,root) %{_mandir}/man8/arping.8.*
 %doc %attr(644,root,root) %{_mandir}/man8/ping.8.*
