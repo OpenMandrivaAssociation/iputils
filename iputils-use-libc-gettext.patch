@@ -1,0 +1,12 @@
+diff -up iputils-20211215/meson.build.omv~ iputils-20211215/meson.build
+--- iputils-20211215/meson.build.omv~	2022-11-13 02:40:54.333536239 +0100
++++ iputils-20211215/meson.build	2022-11-13 02:40:59.460240171 +0100
+@@ -128,7 +128,7 @@ if gettext == true
+ 	conf.set('ENABLE_NLS', 1, description : 'If set enable I18N.')
+ 	conf.set_quoted('LOCALEDIR', localedir)
+ 	subdir ('po')
+-	intl_dep += cc.find_library('intl', required : false)
++        #intl_dep += cc.find_library('intl', required : false)
+ endif
+ 
+ idn = get_option('USE_IDN')
