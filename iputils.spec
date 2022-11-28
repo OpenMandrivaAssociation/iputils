@@ -3,20 +3,19 @@
 
 Summary:	Network monitoring tools including ping
 Name:		iputils
-Version:	20211215
-Release:	3
+Version:	20221126
+Release:	1
 License:	BSD
 Group:		System/Base
 URL:		https://github.com/iputils/iputils
-Source0:	https://github.com/iputils/iputils/archive/refs/tags/%{version}.tar.gz
+Source0:	https://github.com/iputils/iputils/archive/refs/tags/%{name}-%{version}.tar.gz
 # ifenslave.c seems to come from linux-2.6.25/Documentation/networking/ifenslave.c
-Source1:	ifenslave.c
-# bonding.txt seems to come from linux-2.6.25/Documentation/networking/bonding.txt
-Source2:	bonding.txt
-Source3:	ifenslave.8
+# (tpg) grab it from Fedora
+Source1:	ifenslave.tar.gz
 Source4:	bin.ping.apparmor
 Patch0:		iputils-use-libc-gettext.patch
-Patch3:		iputils-ifenslave.patch
+Patch3:		https://src.fedoraproject.org/rpms/iputils/raw/rawhide/f/iputils-ifenslave.patch
+Patch4:		https://src.fedoraproject.org/rpms/iputils/raw/rawhide/f/iputils-ifenslave-CWE-170.patch
 %ifarch riscv64
 BuildRequires:	atomic-devel
 %endif
@@ -37,27 +36,15 @@ BuildRequires:	meson
 BuildRequires:	cmake
 Requires(post):	filesystem >= 2.1.9-18
 %{?systemd_ordering}
+%rename ninfod
 
 %description
 The iputils package contains ping, a basic networking tool. The ping command
 sends a series of ICMP protocol ECHO_REQUEST packets to a specified network
 host and can tell you if that machine is alive and receiving network traffic.
 
-%package ninfod
-Summary:	Node Information Query Daemon
-Group:		System/Base
-Requires:	%{name} = %{EVRD}
-
-%description ninfod
-Node Information Query (RFC4620) daemon. Responds to IPv6 Node Information
-Queries.
-
 %prep
-%setup -q
-
-cp %{SOURCE1} .
-cp %{SOURCE2} .
-cp %{SOURCE3} .
+%setup -q -a 1 -n %{name}-%{version}
 
 %autopatch -p1
 
@@ -74,15 +61,6 @@ mkdir -p %{buildroot}%{_mandir}/man8
 install -cp ifenslave %{buildroot}%{_bindir}/
 install -cp ifenslave.8 %{buildroot}%{_mandir}/man8/
 
-install -d %{buildroot}%{_presetdir}
-cat > %{buildroot}%{_presetdir}/86-rdisc.preset << EOF
-disable rdisc.service
-EOF
-
-cat > %{buildroot}%{_presetdir}/86-ninfod.preset << EOF
-enable ninfod.service
-EOF
-
 # apparmor profile
 mkdir -p %{buildroot}%{_sysconfdir}/apparmor.d/
 install -m 0644 %{SOURCE4} %{buildroot}%{_sysconfdir}/apparmor.d/bin.ping
@@ -90,25 +68,15 @@ install -m 0644 %{SOURCE4} %{buildroot}%{_sysconfdir}/apparmor.d/bin.ping
 %find_lang %{name}
 
 %files -f %{name}.lang
-%doc README.md bonding.txt
+%doc README.md README.bonding
 %config(noreplace) %{_sysconfdir}/apparmor.d/bin.ping
-%{_presetdir}/86-rdisc.preset
-%{_unitdir}/rdisc.service
 %attr(0755,root,root) %caps(cap_net_raw=p) %{_bindir}/clockdiff
 %attr(0755,root,root) %caps(cap_net_raw=p) %{_bindir}/arping
 %attr(0755,root,root) %{_bindir}/ping
 %{_bindir}/tracepath
 %{_bindir}/ifenslave
-%{_bindir}/rdisc
 %doc %attr(644,root,root) %{_mandir}/man8/clockdiff.8.*
 %doc %attr(644,root,root) %{_mandir}/man8/arping.8.*
 %doc %attr(644,root,root) %{_mandir}/man8/ping.8.*
-%doc %attr(644,root,root) %{_mandir}/man8/rdisc.8.*
 %doc %attr(644,root,root) %{_mandir}/man8/tracepath.8.*
 %doc %attr(644,root,root) %{_mandir}/man8/ifenslave.8.*
-
-%files ninfod
-%attr(0755,root,root) %{_sbindir}/ninfod
-%{_presetdir}/86-ninfod.preset
-%{_unitdir}/ninfod.service
-%doc %attr(644,root,root) %{_mandir}/man8/ninfod.8.*
