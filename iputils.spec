@@ -75,8 +75,14 @@ install -m 0644 %{SOURCE4} %{buildroot}%{_sysconfdir}/apparmor.d/bin.ping
 %attr(0755,root,root) %{_bindir}/ping
 %{_bindir}/tracepath
 %{_bindir}/ifenslave
+%if ! %{cross_compiling}
+# FIXME why don't man pages get built when crosscompiling?
+# Probably help2man or something?
+# Either way, we can live without man pages for a bootstrap,
+# so fixing it isn't a priority
 %doc %attr(644,root,root) %{_mandir}/man8/clockdiff.8.*
 %doc %attr(644,root,root) %{_mandir}/man8/arping.8.*
 %doc %attr(644,root,root) %{_mandir}/man8/ping.8.*
 %doc %attr(644,root,root) %{_mandir}/man8/tracepath.8.*
 %doc %attr(644,root,root) %{_mandir}/man8/ifenslave.8.*
+%endif
